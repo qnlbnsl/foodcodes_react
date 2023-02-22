@@ -1,24 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Results from './Results';
+import { getSearchResults } from './getData';
+
+
+// console.log()
 
 function App() {
+  const [data, setData] = useState(getSearchResults(' '))
+
+  const updateBody = (query: string) => {
+    setData(getSearchResults(query))
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input id='test' onChange={ e=> updateBody(e.target.value)}></input>
+      <Results items={data}/>
     </div>
   );
 }
